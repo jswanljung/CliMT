@@ -1001,7 +1001,7 @@ subroutine wetbulb_from_tdew(km,jm,im,cpd,lv,Rd,Rv,t,p,td,tw)
   real(8), dimension(km,jm,im)  :: w
 
   ! Mass mixing ratio is the saturation mass mixing ratio at dew-point temp
-  call ws(km,jm,im,Rd,Rv,td,p,w)
+  call wsflatau(km,jm,im,Rd,Rv,td,p,1,w)
   call wetbulb(km,jm,im,cpd,lv,Rd,Rv,t,p,w,td,tw)
 end subroutine wetbulb_from_tdew
 !-------------------------------------------------------------------------
@@ -1051,7 +1051,7 @@ real(8) function deltawb(params,t)
 
   eps = Rd/Rv
 
-  call ws(1,1,1,Rd,Rv,t,p,w)
+  call wsflatau(1,1,1,Rd,Rv,t,p,1,w)
   deltawb = cpd/lv*(ti-t)-(w-wi)*1.e-3
 
 end function deltawb
